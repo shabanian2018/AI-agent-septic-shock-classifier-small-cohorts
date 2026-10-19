@@ -153,7 +153,7 @@ Corresponding authors:
 
 ## License
 
-A software license has not been specified in this documentation release. The software license and any separate data-use terms should accompany the code release.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
