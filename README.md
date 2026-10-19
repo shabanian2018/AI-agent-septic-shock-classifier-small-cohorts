@@ -46,30 +46,62 @@ A Random Forest classifier was developed with Weights & Biases (W&B) experiment 
 
 ```mermaid
 flowchart TD
-    A["Independent case-control cohorts"] --> B["300 discovery candidates → 185 reproduced SMTs"]
-    B --> C["134 SMTs detected in both longitudinal batches"]
-    D["28 patients · paired ICU and recovery RNA"] --> E["Within-subject log₂ fold changes"]
-    C --> F["28 patients × 134 transcript features"]
-    E --> F
-    F --> G["Development · 22 patients"]
-    F --> H["Held-out test · 6 patients"]
-    G --> I["W&B · 300 runs · stratified fivefold CV"]
-    I --> J["Select by mean macro-precision; refit on all 22"]
-    J --> K["Single final test evaluation"]
-    H --> K
-    J --> L["30 transcripts with nonzero importance"]
-    L --> M["GO enrichment and protein-network context"]
+   
+    A["Independent cohorts: 300 candidates → 185 reproduced transcripts"]
+    B["28 patients · paired ICU and recovery platelet RNA"]
+    C["134 SMT features · within-subject log₂ fold changes"]
+    D["Development cohort · 22 patients"]
+    E["Held-out test cohort · 6 patients"]
 
-    classDef evidence fill:#eef2ff,stroke:#6366f1,color:#312e81,stroke-width:2px;
-    classDef data fill:#ecfeff,stroke:#0891b2,color:#164e63,stroke-width:2px;
-    classDef model fill:#f0fdfa,stroke:#0d9488,color:#134e4a,stroke-width:2px;
-    classDef test fill:#fff7ed,stroke:#ea580c,color:#7c2d12,stroke-width:2px;
-    classDef biology fill:#faf5ff,stroke:#9333ea,color:#581c87,stroke-width:2px;
-    class A,B,C evidence;
-    class D,E,F data;
-    class G,I,J model;
-    class H,K test;
-    class L,M biology;
+    A --> C
+    B --> C
+    C --> D
+    C --> E
+
+    subgraph MLOPS["Automated MLOps"]
+        direction TB
+        F["W&B sweep agents · execute 300 trials"]
+        G["Random Forest training · stratified fivefold CV"]
+        H["Automated evaluation · fold metrics and run tracking"]
+
+        F --> G
+        G --> H
+    end
+
+    D --> F
+
+    I["Human checkpoint · review runs and refine search"]
+    H -.-> I
+    I -.-> F
+
+    J["Select highest mean CV macro-precision"]
+    K["Refit selected model on all 22 development patients"]
+    L["One final evaluation on 6 unseen patients"]
+    M["5 of 6 correct · accuracy 0.833 · AUROC 0.89"]
+    N["30 transcripts with nonzero feature importance"]
+    O["Biological interpretation · pathways and protein networks"]
+
+    H --> J
+    J --> K
+    K --> L
+    E --> L
+    L --> M
+    K --> N
+    N --> O
+
+    classDef evidence fill:#EEF2FF,stroke:#6366F1,color:#312E81,stroke-width:2px;
+    classDef data fill:#ECFEFF,stroke:#0891B2,color:#164E63,stroke-width:2px;
+    classDef automation fill:#F0FDFA,stroke:#0D9488,color:#134E4A,stroke-width:2px;
+    classDef human fill:#FAF5FF,stroke:#9333EA,color:#581C87,stroke-width:2px;
+    classDef evaluation fill:#FFF7ED,stroke:#EA580C,color:#7C2D12,stroke-width:2px;
+
+    class A evidence;
+    class B,C,D data;
+    class F,G,H,J,K automation;
+    class I,N,O human;
+    class E,L,M evaluation;
+
+    style MLOPS fill:#F8FAFC,stroke:#0D9488,stroke-width:2px;
 ```
 
 The independent case-control cohorts establish the SMT feature set. They are separate from the longitudinal cohort used for shock classification. Both RNA samples from a patient contribute to one feature vector, so partitioning is at the **patient level**.
