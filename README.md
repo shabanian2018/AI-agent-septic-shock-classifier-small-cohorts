@@ -189,4 +189,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-**Research use only. This proof-of-concept classifier is not a validated clinical decision-support tool.**
