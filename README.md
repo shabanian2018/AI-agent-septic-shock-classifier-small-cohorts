@@ -1,8 +1,7 @@
-# AI-agent-septic-shock-classifier-small-cohorts
-
 <div align="center">
 
 # Septic Shock Classification
+# AI Agent–Assisted MLOps
 ### Within-Subject Platelet Transcriptome Dynamics
 
 **Paired RNA-seq · Mechanism-informed features · Random Forest · MLOps**
@@ -108,8 +107,6 @@ The 30 prioritized transcripts had nonzero mean-decrease-in-impurity importance 
 | Macro-precision | 0.875 |
 | Macro-recall | 0.833 |
 | AUROC | 0.89 |
-| Septic shock precision | 1.000 |
-| Septic shock recall | 0.667 |
 
 **Confusion matrix — patient counts**
 
