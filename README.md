@@ -174,7 +174,7 @@ For data-access inquiries, contact **Matthew T. Rondina** at [Matthew.Rondina@hs
 
 Shabanian M, Pouladi N, Wilson LS, Morgan K, Li J, Kenost C, Middleton EA, Tolley N, Campbell RA, Nelson R, Rowley JW, Lussier YA, Rondina MT. *Septic Shock Classification from Within-Subject Platelet Transcriptome Dynamics in a Small Cohort: A Proof-of-Concept.* Manuscript.
 
-Mahdieh Shabanian and Nima Pouladi contributed equally. Publication details and the DOI should be added when available.
+Mahdieh Shabanian and Nima Pouladi are joint first authors.
 
 ## Contact
 
